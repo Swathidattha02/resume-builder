@@ -1,0 +1,123 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Simple Resume Builder</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="wrap">
+      <header>
+        <div>
+          <h1>Simple Resume Builder</h1>
+          <div class="sub">Fill the form, preview, save to JSON, and download as PDF.</div>
+        </div>
+        <div style="text-align:right;">
+          <div class="sub" id="draftHint">Draft will be saved in your browser.</div>
+        </div>
+      </header>
+
+      <div class="grid">
+        <div class="panel">
+          <div class="panel-title">Resume Form</div>
+          <div class="row">
+            <div>
+              <label for="fullName">Full Name</label>
+              <input id="fullName" type="text" placeholder="e.g. Swathi R" />
+            </div>
+            <div>
+              <label for="templateSelect">Template</label>
+              <select id="templateSelect">
+                <option value="template4" selected>Template 4 (Professional)</option>
+                <option value="template3">Template 3 (Classic)</option>
+                <option value="template1">Template 1 (Clean)</option>
+                <option value="template2">Template 2 (Modern)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row">
+            <div>
+              <label for="linkedin">LinkedIn Profile URL</label>
+              <input id="linkedin" type="text" placeholder="e.g. https://linkedin.com/in/your-name" />
+            </div>
+            <div>
+              <label for="github">GitHub URL</label>
+              <input id="github" type="text" placeholder="e.g. https://github.com/your-username" />
+            </div>
+          </div>
+
+          <label for="email">Email</label>
+          <input id="email" type="email" placeholder="e.g. name@email.com" />
+
+          <label for="phone">Phone Number</label>
+          <input id="phone" type="text" placeholder="e.g. +1 555 123 4567" />
+
+          <label for="address">Address</label>
+          <textarea id="address" placeholder="Street, City, State, Zip" style="min-height:70px;"></textarea>
+
+          <label for="skillsText">Skills (comma or new line separated)</label>
+          <textarea id="skillsText" placeholder="JavaScript, Node.js, React"></textarea>
+
+          <label for="careerObjective">Career Objective</label>
+          <textarea id="careerObjective" placeholder="Write a short career objective (2–4 lines)..." style="min-height:90px;"></textarea>
+
+          <div class="row">
+            <div>
+              <label for="educationText">Education (one per line)</label>
+              <textarea id="educationText" placeholder="Degree - School - Year"></textarea>
+            </div>
+            <div>
+              <label for="experienceText">Experience (one per line)</label>
+              <textarea id="experienceText" placeholder="Role - Company - Years"></textarea>
+            </div>
+          </div>
+
+          <label for="projectsText">Projects (one per line)</label>
+          <textarea id="projectsText" placeholder="Project - What you built"></textarea>
+
+          <label for="technicalSkillsText">Technical Skills (one per line, like your resume)</label>
+          <textarea id="technicalSkillsText" placeholder="Languages: Java, Python, JavaScript&#10;Backend: Node.js, Express.js&#10;Frontend: HTML, CSS"></textarea>
+
+          <label for="achievementsText">Achievements (one per line)</label>
+          <textarea id="achievementsText" placeholder="Achievement 1&#10;Achievement 2"></textarea>
+
+          <label for="certificationsText">Certifications (optional, one per line)</label>
+          <textarea id="certificationsText" placeholder="Certification - Issuer - Year"></textarea>
+
+          <label for="volunteeringText">Volunteering (optional, one per line)</label>
+          <textarea id="volunteeringText" placeholder="Volunteer work 1&#10;Volunteer work 2"></textarea>
+
+          <div class="actions">
+            <button id="previewBtn" class="primary" type="button">Preview Resume</button>
+            <button id="saveBtn" type="button">Save Resume</button>
+            <button id="downloadBtn" type="button">Download PDF</button>
+            <button id="newBtn" type="button" class="danger" title="Clear the form">New / Clear</button>
+          </div>
+
+          <div class="status" id="statusBox"></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-title">Preview & Saved Resumes</div>
+
+          <label>Preview</label>
+          <iframe id="previewFrame" class="preview-frame"></iframe>
+
+          <div style="margin-top:14px;">
+            <div class="panel-title" style="margin-bottom:6px;">Saved Resumes (file-based JSON)</div>
+            <div class="mini-actions" style="margin-bottom:10px;">
+              <button id="refreshSavedBtn" type="button">Refresh</button>
+              <button id="clearSavedBtn" type="button" class="danger" title="Clears only server-saved files">Clear All Saved</button>
+            </div>
+            <div class="saved-list" id="savedList"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
+
