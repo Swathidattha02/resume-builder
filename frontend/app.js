@@ -1,4 +1,4 @@
-const API_BASE = 'https://your-backend.onrender.com'; // Replace with your actual Render service URL
+const API_BASE = 'https://resume-builder-8a3n.onrender.com'; // Replace with your actual Render service URL
 
 const draftKey = 'resume_builder_draft_v1';
 const lastSavedKey = 'resume_builder_last_saved_id_v1';
