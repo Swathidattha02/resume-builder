@@ -182,6 +182,7 @@ app.post('/api/resume/download', async (req, res) => {
     res.setHeader('Content-Disposition', `attachment; filename="${safeName}.pdf"`);
     res.send(pdfBuffer);
   } catch (_err) {
+    console.error(err);
     res.status(500).json({ error: 'Failed to generate PDF' });
   }
 });
