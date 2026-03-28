@@ -1,3 +1,4 @@
+// resumeTemplates.js - Functions to render resume HTML from data for different templates.
 function escapeHtml(value) {
   if (value === null || value === undefined) return '';
   return String(value)

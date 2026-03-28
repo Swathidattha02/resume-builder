@@ -1,3 +1,4 @@
+// server.js - Express server for Resume Builder app, handling resume data storage and PDF generation.
 const path = require('path');
 const fs = require('fs');
 const fsp = require('fs/promises');
@@ -8,7 +9,13 @@ const puppeteer = require('puppeteer');
 const { renderResumeHTML } = require('./resumeTemplates');
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: "https://resume-builder-q8hfc8y4o-pasupuleti-swathis-projects.vercel.app",
+  methods: ["GET", "POST", "OPTIONS"],
+  allowedHeaders: ["Content-Type"],
+}));
+
+app.options("*", cors()); // VERY IMPORTANT
 app.use(express.json({ limit: '1mb' }));
 
 const ROOT_DIR = path.resolve(__dirname, '..');
@@ -179,6 +186,7 @@ app.post('/api/resume/download', async (req, res) => {
     const pdfBuffer = await renderPdfFromHtml(html);
     const safeName = (resumeData?.fullName || 'resume').replace(/[^\w\- ]+/g, '').trim() || 'resume';
     res.setHeader('Content-Type', 'application/pdf');
+    res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Content-Disposition', `attachment; filename="${safeName}.pdf"`);
     res.send(pdfBuffer);
   } catch (_err) {
@@ -201,6 +209,7 @@ app.get('/api/resume/:id/download', async (req, res) => {
       .replace(/[^\w\- ]+/g, '')
       .trim() || 'resume';
     res.setHeader('Content-Type', 'application/pdf');
+      res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Content-Disposition', `attachment; filename="${safeName}.pdf"`);
     res.send(pdfBuffer);
   } catch (_err) {
@@ -218,7 +227,7 @@ app.post('/api/resume/clear', async (_req, res) => {
       jsonFiles.map((f) => fsp.unlink(path.join(STORAGE_DIR, f)).catch(() => {}))
     );
     res.json({ ok: true, deleted: jsonFiles.length });
-  } catch (_err) {
+  } catch (err) {
     res.status(500).json({ error: 'Failed to clear saved resumes' });
   }
 });

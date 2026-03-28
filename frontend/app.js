@@ -1,3 +1,4 @@
+// app.js - Frontend JavaScript for Resume Builder app, handling form interactions and API calls.
 const API_BASE = 'https://resume-builder-8a3n.onrender.com'; // Replace with your actual Render service URL
 
 const draftKey = 'resume_builder_draft_v1';
